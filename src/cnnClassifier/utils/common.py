@@ -1,15 +1,15 @@
 import os
-from box.exception import BoxValueError
+from box.exceptions import BoxValueError
 import yaml
 from cnnClassifier import logger
 import json
 import joblib
-from ensure import ensure_annotation
+from ensure import ensure_annotations
 from box import ConfigBox 
 from pathlib import Path
-from typing import AnyStr
+from typing import Any
 
-@ensure_annotation
+@ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
     """
     reads yaml file and argument
@@ -35,7 +35,7 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
     
 
 
-@ensure_annotation
+@ensure_annotations
 def create_directories(path_to_directories: list, verbose = True):
     for path in path_to_directories:
         os.makedirs(path, exist_ok=True)
@@ -43,7 +43,7 @@ def create_directories(path_to_directories: list, verbose = True):
             logger.info(f"created directory at: {path}")
 
         
-@ensure_annotation
+@ensure_annotations
 def save_json(path: Path, data: dict):
     with open(path,"w") as f:
         json.dump(data,f,indent=4)
