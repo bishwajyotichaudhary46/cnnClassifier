@@ -8,6 +8,7 @@ from ensure import ensure_annotations
 from box import ConfigBox 
 from pathlib import Path
 from typing import Any
+import base64
 
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
@@ -58,4 +59,14 @@ def load_bin(path: Path) ->Any:
 def get_size(path: Path) ->str:
     size_in_kb = round(os.path.getsize(path)/1024)
     return f"~ {size_in_kb} KB"
+
+def decodeImage(imgstring, fileName):
+    imagdata = base64.b64decode(imgstring)
+    with open(fileName, "wb") as f:
+        f.write(imagdata)
+        f.close()
+
+def encodeImageIntoBase64(croppedImagePath):
+    with open(croppedImagePath,"rb") as f:
+        return base64.b64encode(f.read())
 
